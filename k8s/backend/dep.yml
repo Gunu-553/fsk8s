@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mybackend
+  labels:
+    app: mybackend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mybackend
+  template:
+    metadata:
+      labels:
+        app: mybackend
+    spec:
+      containers:
+      - image: adrf968/backend:latest
+        name: backend
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_USER
+          value: "admin"
+        - name: DB_PASSWORD
+          value: "12345"
+        - name: DB_SERVER
+          value: "35.202.61.150"
+        - name: DB_DATABASE
+          value: "user"
+        - name: DB_PORT
+          value: "3306"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mybackend-service
+  labels:
+    app: mybackend
+spec:
+  selector:
+    app: mybackend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer
