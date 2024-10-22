@@ -55,7 +55,7 @@ const App = () => {
             </form>
             <h2>Users List</h2>
             <ul className="user-list">
-                {users.map((user, index) => (
+                {users?.map((user, index) => (
                     <li key={index}>
                         <span className="user-name">{user.name}</span>
                         <span className="user-address">{user.address}</span>
