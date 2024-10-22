@@ -12,6 +12,7 @@ const App = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/users`);
+                console.log(apiUrl);
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
